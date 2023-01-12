@@ -24,7 +24,7 @@ def create_user(
 @myApp.get("/users/", response_model=List[_schemas.User])
 def read_users(
     skip: int = 0,
-    limit: int = 10,
+    limit: int = 100,
     db: _orm.Session = _fastapi.Depends(_service.get_db),
 ):
     users = _service.get_users(db=db, skip=skip, limit=limit)

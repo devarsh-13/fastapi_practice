@@ -1,4 +1,5 @@
 import sqlalchemy.orm as _orm
+from sqlalchemy import text
 
 import model as _model, schema as _schema, db as _database
 
@@ -25,10 +26,12 @@ def get_user_by_email(db:_orm.Session,email:str):
 
     return db.query(_model.User).filter(_model.User.email == email).first()
 
+   
+
 
 def create_user(db: _orm.Session, user: _schema.UserCreate):
-    fake_hashed_password = user.password + "thisisnotsecure"
-    db_user = _model.User(email=user.email, password=fake_hashed_password)
+    not_hashed_password = user.password 
+    db_user = _model.User(email=user.email, password=not_hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -36,7 +39,7 @@ def create_user(db: _orm.Session, user: _schema.UserCreate):
 
 
 def get_users(db: _orm.Session, skip: int = 0, limit: int = 100):
-    return db.query(_model.User).offset(skip).limit(limit).all()
+    return db.execute(text("SELECT * FROM user LIMIT :limit OFFSET :offset "),{'limit':limit,'offset':skip}).fetchall()
 
 
 def get_user_by_id(db: _orm.Session, user_id: int):

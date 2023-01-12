@@ -15,9 +15,9 @@ class User(_database.Base):
 
     id = _sql.Column(_sql.Integer,primary_key = True, index = True)
 
-    email = _sql.Column(_sql.String,unique = True,index = True)
+    email = _sql.Column(_sql.String(20),unique = True,index = True)
 
-    password = _sql.Column(_sql.String)
+    password = _sql.Column(_sql.VARCHAR(255))
 
     dob = _sql.Column(_sql.DateTime)
 
@@ -31,9 +31,9 @@ class Blogs(_database.Base):
 
      b_id  = _sql.Column(_sql.Integer,primary_key = True, index = True)
 
-     b_title  = _sql.Column(_sql.String,unique = True,index = True)
+     b_title  = _sql.Column(_sql.String(20),unique = True,index = True)
 
-     b_desc = _sql.Column(_sql.String)
+     b_desc = _sql.Column(_sql.String(20))
 
      b_created = _sql.Column(_sql.DateTime,default = dt.datetime.now)
 

@@ -2,9 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 import sqlalchemy.orm as _orm
 
-connection_url = "sqlite:///./database.db"
+connection_url = "mysql+mysqlconnector://root@localhost:3306/practice"
 
-engine = create_engine(connection_url,connect_args={"check_same_thread": False})
+engine = create_engine(connection_url)
 
 
 
