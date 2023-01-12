@@ -1,8 +1,11 @@
 import sqlalchemy.orm as _orm
 from sqlalchemy import text
+from passlib.context import CryptContext
 
 import model as _model, schema as _schema, db as _database
 
+
+pwd_context = CryptContext(schemes=["bcrypt"],deprecated = "auto")
 
 def create_database():
     return _database.Base.metadata.create_all(bind=_database.engine)
@@ -30,8 +33,13 @@ def get_user_by_email(db:_orm.Session,email:str):
 
 
 def create_user(db: _orm.Session, user: _schema.UserCreate):
-    not_hashed_password = user.password 
-    db_user = _model.User(email=user.email, password=not_hashed_password)
+
+    
+   
+
+
+
+    db_user = _model.User(email=user.email, password=user.password )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -43,7 +51,7 @@ def get_users(db: _orm.Session, skip: int = 0, limit: int = 100):
 
 
 def get_user_by_id(db: _orm.Session, user_id: int):
-    return db.query(_model.User).filter(_model.User.id == user_id).first()
+    return db.execute(text("SELECT * FROM user WHERE id = :id"),{'id':user_id}).fetchone()
 
 
 def create_blogs(db:_orm.Session,blog:_schema.BlogCreate,user_id:int):

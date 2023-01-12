@@ -1,4 +1,4 @@
-from typing import List
+from typing import List,Optional
 import datetime as dt
 import pydantic as pydantic
 
@@ -23,11 +23,15 @@ class Blog(_BlogBase):
 
  
 class _UserBase(pydantic.BaseModel):
-    email: str
+    email: str = None
 
 
 class UserCreate(_UserBase):
     password: str
+
+    class Config:
+        allow_none = True
+
 
 
 class User(_UserBase):
@@ -37,3 +41,4 @@ class User(_UserBase):
 
     class Config:
         orm_mode = True
+        allow_none = True

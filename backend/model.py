@@ -13,11 +13,11 @@ class User(_database.Base):
 
     __tablename__ = "user"
 
-    id = _sql.Column(_sql.Integer,primary_key = True, index = True)
+    id = _sql.Column(_sql.Integer,primary_key = True, index = True,autoincrement = True)
 
-    email = _sql.Column(_sql.String(20),unique = True,index = True)
+    email = _sql.Column(_sql.String,unique = True,index = True)
 
-    password = _sql.Column(_sql.VARCHAR(255))
+    password = _sql.Column(_sql.VARCHAR(100))
 
     dob = _sql.Column(_sql.DateTime)
 
