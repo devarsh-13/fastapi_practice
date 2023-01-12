@@ -2,7 +2,7 @@ from typing import List,Optional
 import datetime as dt
 import pydantic as pydantic
 
-
+#schema structure which will use pydantic model for validation
 class _BlogBase(pydantic.BaseModel):
     b_title: str
     b_desc: str

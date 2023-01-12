@@ -3,6 +3,8 @@ import fastapi as _fastapi
 import sqlalchemy.orm as _orm
 import service as _service, schema as _schemas
 
+
+
 myApp = _fastapi.FastAPI()
 
 _service.create_database()

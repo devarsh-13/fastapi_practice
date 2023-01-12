@@ -8,6 +8,7 @@ import db as _database
 import datetime as dt
 
 
+#made tables of users and blogs
 
 class User(_database.Base):
 
