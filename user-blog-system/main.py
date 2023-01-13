@@ -57,7 +57,7 @@ def create_blogs(user_id:int,blog:_schemas.BlogCreate,db:_orm.Session= _fastapi.
 @myApp.get("/blogs/", response_model=List[_schemas.Blog])
 def read_blogs(
     skip: int = 0,
-    limit: int = 10,
+    limit: int = 11,
     db: _orm.Session = _fastapi.Depends(_service.get_db),
 ):
     blogs = _service.get_blogs(db=db, skip=skip, limit=limit)
